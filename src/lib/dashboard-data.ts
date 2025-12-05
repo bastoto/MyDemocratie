@@ -125,12 +125,16 @@ export async function getUserActivity(userId: string): Promise<UserActivity> {
         .order('creationdate', { ascending: false })
         .limit(5)
 
-    const { data: lastComments } = await supabase
+    const { data: lastComments, error: commentsError } = await supabase
         .from('messages')
-        .select('*, topics(title)')
+        .select('*, topics(id, title, debatespace_id, debatespaces(article_id, articles(title)))')
         .eq('author_id', userId)
         .order('creationdate', { ascending: false })
         .limit(5)
+
+    if (commentsError) {
+        console.error('Error fetching comments:', commentsError)
+    }
 
     return {
         lastVotes: lastVotes || [],

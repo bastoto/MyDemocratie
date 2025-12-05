@@ -137,12 +137,16 @@ export default function ActivityPanel({ title, items, type, userId }: ActivityPa
                                     <span className="flex flex-col gap-1">
                                         <span>
                                             Commented on topic{' '}
-                                            <Link href={`/articles/${item.topics?.article_id}#topic-${item.topics?.id}`} className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                                            <Link href={`/articles/${item.topics?.debatespaces?.article_id}#topic-${item.topics?.id}`} className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
                                                 {item.topics?.title || 'Unknown'}
                                             </Link>
                                         </span>
                                         <span className="text-xs text-slate-500 dark:text-slate-400">
-                                            {formatVoteDate(item.creationdate)}
+                                            Article:{' '}
+                                            <Link href={`/articles/${item.topics?.debatespaces?.article_id}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+                                                {item.topics?.debatespaces?.articles?.title || 'Unknown'}
+                                            </Link>
+                                            {' • '}{formatVoteDate(item.creationdate)}
                                         </span>
                                     </span>
                                 )}
