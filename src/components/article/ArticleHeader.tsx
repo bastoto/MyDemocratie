@@ -86,7 +86,13 @@ export default function ArticleHeader({
             </h1>
 
             <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <span>By <span className="font-medium text-slate-900 dark:text-slate-200">{authorName}</span></span>
+                <span>By {authorName === 'You' ? (
+                    <span className="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                        You
+                    </span>
+                ) : (
+                    <span className="font-medium text-slate-900 dark:text-slate-200">{authorName}</span>
+                )}</span>
                 <span>•</span>
                 <span>{formatDate(creationDate)}</span>
             </div>

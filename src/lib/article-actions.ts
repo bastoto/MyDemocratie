@@ -145,7 +145,7 @@ export async function getArticle(id: string) {
     // Now fetch related data separately
     const { data: author } = await supabase
         .from('users')
-        .select('firstname, lastname')
+        .select('pseudo')
         .eq('id', article.author_id)
         .single()
 
@@ -512,8 +512,7 @@ export async function getUrgentVotingArticles() {
             status,
             statuschangedate,
             author:users!articles_author_id_fkey (
-                firstname,
-                lastname
+                pseudo
             ),
             debate_duration_voting_opened_result (
                 voted_debate_duration
@@ -558,8 +557,7 @@ export async function getUrgentVotingArticles() {
                 status: article.status,
                 statuschangedate: article.statuschangedate,
                 author: authorData ? {
-                    firstname: authorData.firstname,
-                    lastname: authorData.lastname
+                    pseudo: authorData.pseudo
                 } : null,
                 deadline: deadline.toISOString(),
                 timeRemaining

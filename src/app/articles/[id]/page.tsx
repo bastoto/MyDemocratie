@@ -61,7 +61,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
                             officialNumber={article.official_article_number}
                             constitutionalCount={constitutionalCount}
                             creationDate={article.creationdate}
-                            authorName={`${article.author?.firstname || ''} ${article.author?.lastname || ''}`.trim() || 'Unknown Author'}
+                            authorName={
+                                article.author_id === user?.id
+                                    ? 'You'
+                                    : (article.author?.pseudo || 'Unknown Author')
+                            }
                         />
 
                         <ArticleContent

@@ -85,31 +85,37 @@ export default async function Home() {
                 label="Approved"
                 articles={stats.constitutional.approved}
                 color="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Rejected"
                 articles={stats.constitutional.rejected}
                 color="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Ignored"
                 articles={stats.constitutional.ignored}
                 color="bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300"
+                userId={user?.id}
               />
               <StatCard
                 label="In Debate"
                 articles={stats.constitutional.debateOngoing}
                 color="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Voting Open"
                 articles={stats.constitutional.votingOpened}
                 color="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Duration Voting"
                 articles={stats.constitutional.debateDurationVoting}
                 color="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
+                userId={user?.id}
               />
             </div>
           </div>
@@ -125,31 +131,37 @@ export default async function Home() {
                 label="Approved"
                 articles={stats.law.approved}
                 color="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Rejected"
                 articles={stats.law.rejected}
                 color="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Ignored"
                 articles={stats.law.ignored}
                 color="bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300"
+                userId={user?.id}
               />
               <StatCard
                 label="In Debate"
                 articles={stats.law.debateOngoing}
                 color="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Voting Open"
                 articles={stats.law.votingOpened}
                 color="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300"
+                userId={user?.id}
               />
               <StatCard
                 label="Duration Voting"
                 articles={stats.law.debateDurationVoting}
                 color="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
+                userId={user?.id}
               />
             </div>
           </div>

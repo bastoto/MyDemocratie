@@ -52,7 +52,7 @@ export async function getArticleStats(): Promise<ArticleStats> {
             status, 
             statuschangedate,
             author_id,
-            users:author_id (firstname, lastname)
+            users:author_id (pseudo)
         `)
         .order('statuschangedate', { ascending: false })
 

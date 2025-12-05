@@ -87,7 +87,7 @@ export async function getTopics(
             creationdate,
             lastupdate,
             author_id,
-            users:author_id (firstname, lastname),
+            users:author_id (pseudo),
             messages (count)
         `, { count: 'exact' })
         .eq('debatespace_id', debatespaceId)
