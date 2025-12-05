@@ -10,8 +10,7 @@ interface UrgentArticle {
     status: string
     statuschangedate: string
     author: {
-        firstname: string
-        lastname: string
+        pseudo: string
     } | null
     deadline: string
     timeRemaining: number
@@ -88,13 +87,13 @@ export default function UrgentVotingSection({ articles }: UrgentVotingSectionPro
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                     <span className={`px-2 py-1 rounded text-xs font-semibold uppercase ${article.type === 'constitutional'
-                                            ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300'
-                                            : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300'
+                                        ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300'
+                                        : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300'
                                         }`}>
                                         {article.type}
                                     </span>
                                     <span className="text-xs text-slate-500 dark:text-slate-400">
-                                        by {article.author ? `${article.author.firstname} ${article.author.lastname}` : 'Unknown'}
+                                        by {article.author?.pseudo || 'Unknown'}
                                     </span>
                                 </div>
                                 <h3 className="font-semibold text-slate-900 dark:text-white mb-1 line-clamp-2">
