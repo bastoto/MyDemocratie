@@ -8,18 +8,19 @@ interface Topic {
     category: string
     creationdate: string
     lastupdate: string
+    author_id: string
     author: {
-        firstname: string
-        lastname: string
+        pseudo: string
     } | null
     messageCount: number
 }
 
 interface TopicListTableProps {
     topics: Topic[]
+    userId?: string
 }
 
-export default function TopicListTable({ topics }: TopicListTableProps) {
+export default function TopicListTable({ topics, userId }: TopicListTableProps) {
     const formatDate = (dateString: string) => {
         const date = new Date(dateString)
         return date.toLocaleDateString('en-US', {
@@ -102,10 +103,16 @@ export default function TopicListTable({ topics }: TopicListTableProps) {
                                     {topic.category}
                                 </span>
                             </td>
-                            <td className="py-3 px-4 text-sm text-slate-600 dark:text-slate-400">
-                                {topic.author
-                                    ? `${topic.author.firstname} ${topic.author.lastname}`
-                                    : 'Anonymous'}
+                            <td className="py-3 px-4 text-sm">
+                                {topic.author_id === userId ? (
+                                    <span className="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                                        You
+                                    </span>
+                                ) : (
+                                    <span className="text-slate-600 dark:text-slate-400">
+                                        {topic.author?.pseudo || 'Anonymous'}
+                                    </span>
+                                )}
                             </td>
                             <td className="py-3 px-4 text-center">
                                 <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">

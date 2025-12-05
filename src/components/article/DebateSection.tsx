@@ -106,7 +106,7 @@ export default function DebateSection({ debatespaceId, userId }: DebateSectionPr
                     </svg>
                 </div>
             ) : (
-                <TopicListTable topics={topics} />
+                <TopicListTable topics={topics} userId={userId} />
             )}
 
             {/* Pagination */}

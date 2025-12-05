@@ -117,6 +117,7 @@ export async function getTopics(
         category: topic.category,
         creationdate: topic.creationdate,
         lastupdate: topic.lastupdate,
+        author_id: topic.author_id,
         author: topic.users as any,
         messageCount: Array.isArray(topic.messages) ? topic.messages.length : 0
     })) || []
