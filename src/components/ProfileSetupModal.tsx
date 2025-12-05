@@ -140,10 +140,30 @@ export default function ProfileSetupModal({
                 </div>
 
                 <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
-                    <p className="text-sm text-blue-900 dark:text-blue-100">
+                    <p className="text-sm text-blue-900 dark:text-blue-100 mb-4">
                         To protect your privacy, we'll generate a secure passphrase and a unique pseudo for you.
                         Your real name will be encrypted and never displayed publicly.
                     </p>
+
+                    {/* Pseudo Preview */}
+                    <div className="mt-4">
+                        <p className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-2">Your Pseudo:</p>
+                        <div className="flex items-center gap-2">
+                            <div className="flex-1 p-3 bg-white dark:bg-slate-800 border-2 border-blue-300 dark:border-blue-700 rounded-lg">
+                                <p className="text-lg font-bold text-blue-900 dark:text-blue-100">{generatedPseudo}</p>
+                            </div>
+                            <button
+                                onClick={handleRegeneratePseudo}
+                                disabled={loading}
+                                className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium disabled:opacity-50 whitespace-nowrap"
+                            >
+                                Regenerate
+                            </button>
+                        </div>
+                        <p className="text-xs text-blue-800 dark:text-blue-200 mt-2">
+                            This will be your public identity. You can regenerate it until you're happy!
+                        </p>
+                    </div>
                 </div>
 
                 <button
@@ -151,7 +171,7 @@ export default function ProfileSetupModal({
                     disabled={loading}
                     className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50"
                 >
-                    Get Started
+                    Continue with this Pseudo
                 </button>
             </div>
         </div>
