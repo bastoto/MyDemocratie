@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { getStoredPassphrase } from '@/lib/vote-encryption'
-import { verifyApproveRejectVote, verifyDurationVote } from '@/lib/encryption'
+import { getStoredPassphrase, verifyApproveRejectVote, verifyDurationVote } from '@/lib/vote-encryption'
 
 interface ActivityPanelProps {
     title: string
