@@ -7,8 +7,7 @@ export type ArticleSummary = {
     goal: string
     author_id: string
     author: {
-        firstname: string
-        lastname: string
+        pseudo: string
     } | null
     statuschangedate: string
 }
