@@ -5,6 +5,17 @@ export default async function Navbar() {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
+    // Fetch user's pseudo if logged in
+    let userPseudo = null
+    if (user) {
+        const { data: profile } = await supabase
+            .from('users')
+            .select('pseudo')
+            .eq('id', user.id)
+            .maybeSingle()
+        userPseudo = profile?.pseudo
+    }
+
     return (
         <nav className="w-full flex justify-center border-b border-slate-200 dark:border-slate-800 h-16 bg-white dark:bg-slate-950 shadow-sm">
             <div className="w-full max-w-7xl flex justify-between items-center px-6 text-sm">
@@ -27,7 +38,16 @@ export default async function Navbar() {
                 <div className="flex gap-4 items-center">
                     {user ? (
                         <div className="flex gap-4 items-center">
-                            <span className="hidden sm:inline text-slate-600 dark:text-slate-300 font-medium">{user.email}</span>
+                            {userPseudo && (
+                                <div className="hidden sm:flex gap-2 items-center">
+                                    <span className="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                                        You:
+                                    </span>
+                                    <span className="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                                        {userPseudo}
+                                    </span>
+                                </div>
+                            )}
                             <form action="/auth/signout" method="post">
                                 <button className="bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-md px-4 py-2 text-slate-900 dark:text-white transition-all text-xs font-semibold uppercase tracking-wide">
                                     Logout

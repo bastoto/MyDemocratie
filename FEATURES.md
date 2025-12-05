@@ -79,7 +79,10 @@ All author displays now show `pseudo` instead of encrypted names:
 #### "You" Badge
 When viewing your own content, displays "You" in a yellow badge instead of your pseudo:
 - **Styling**: Yellow background, rounded pill, semi-bold
-- **Locations**: Article headers, stat card lists
+- **Locations**: 
+  - Article headers
+  - Stat card lists
+  - **Navbar** - Shows "You:" badge followed by pseudo badge (top right corner)
 - **Logic**: Compares `author_id` with current `user.id`
 
 ### Pseudo Generation

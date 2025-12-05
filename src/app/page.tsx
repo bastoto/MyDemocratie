@@ -106,13 +106,13 @@ export default async function Home() {
                 userId={user?.id}
               />
               <StatCard
-                label="Voting Open"
+                label="Voting Opened"
                 articles={stats.constitutional.votingOpened}
                 color="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300"
                 userId={user?.id}
               />
               <StatCard
-                label="Duration Voting"
+                label="Debate Duration Voting"
                 articles={stats.constitutional.debateDurationVoting}
                 color="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
                 userId={user?.id}
@@ -152,13 +152,13 @@ export default async function Home() {
                 userId={user?.id}
               />
               <StatCard
-                label="Voting Open"
+                label="Voting Opened"
                 articles={stats.law.votingOpened}
                 color="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300"
                 userId={user?.id}
               />
               <StatCard
-                label="Duration Voting"
+                label="Debate Duration Voting"
                 articles={stats.law.debateDurationVoting}
                 color="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
                 userId={user?.id}
