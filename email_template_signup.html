@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Account - Democratic Dashboard</title>
+</head>
+
+<body
+    style="margin: 0; padding: 0; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+        style="background-color: #f1f5f9; padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <table border="0" cellpadding="0" cellspacing="0" width="600"
+                    style="max-width: 600px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); overflow: hidden;">
+
+                    <!-- Header with gradient -->
+                    <tr>
+                        <td
+                            style="padding: 40px 40px 30px 40px; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); text-align: center;">
+                            <h1
+                                style="margin: 0; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
+                                Democratic Dashboard</h1>
+                            <p style="margin: 8px 0 0 0; font-size: 14px; color: #dbeafe; font-weight: 500;">Your Voice
+                                Matters</p>
+                        </td>
+                    </tr>
+
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 600; color: #0f172a;">Welcome
+                                to Democracy! 🏛️</h2>
+                            <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #475569;">
+                                Thank you for joining our democratic platform. You're now one step away from
+                                participating in shaping the future through constitutional articles and laws.
+                            </p>
+                            <p style="margin: 0 0 32px 0; font-size: 16px; line-height: 1.6; color: #475569;">
+                                Please confirm your email address to activate your account and start making your voice
+                                heard.
+                            </p>
+
+                            <!-- Button -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center" style="padding: 0 0 32px 0;">
+                                        <a href="{{ .ConfirmationURL }}"
+                                            style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff; text-decoration: none; font-weight: 600; font-size: 16px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3); transition: all 0.2s;">
+                                            Confirm Email Address
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Alternative link -->
+                            <div
+                                style="padding: 24px; background-color: #f8fafc; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                                <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #334155;">Button
+                                    not working?</p>
+                                <p style="margin: 0; font-size: 13px; color: #64748b; word-break: break-all;">
+                                    Copy and paste this link into your browser:<br>
+                                    <a href="{{ .ConfirmationURL }}" style="color: #2563eb; text-decoration: none;">{{
+                                        .ConfirmationURL }}</a>
+                                </p>
+                            </div>
+
+                            <p style="margin: 32px 0 0 0; font-size: 14px; color: #94a3b8; line-height: 1.5;">
+                                If you didn't create an account with Democratic Dashboard, you can safely ignore this
+                                email.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 32px 40px; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center">
+                                        <p
+                                            style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #475569;">
+                                            Democratic Dashboard</p>
+                                        <p style="margin: 0; font-size: 12px; color: #94a3b8;">
+                                            Empowering citizens to shape their future
+                                        </p>
+                                        <p style="margin: 16px 0 0 0; font-size: 11px; color: #cbd5e1;">
+                                            &copy; 2025 Democratic Dashboard. All rights reserved.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Footer text -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px;">
+                    <tr>
+                        <td align="center" style="padding: 24px 20px;">
+                            <p style="margin: 0; font-size: 12px; color: #64748b; line-height: 1.5;">
+                                This email was sent to you because you signed up for Democratic Dashboard.<br>
+                                If you have any questions, please contact our support team.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
