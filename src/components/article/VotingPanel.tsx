@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { hasPassphrase, getStoredPassphrase, hashVoteValue } from '@/lib/vote-encryption'
-import { verifyApproveRejectVote, verifyDurationVote } from '@/lib/encryption'
+import { hasPassphrase, getStoredPassphrase, hashVoteValue, verifyApproveRejectVote, verifyDurationVote } from '@/lib/vote-encryption'
 import { voteForDuration, voteApproveReject, transitionArticleStatus } from '@/lib/article-actions'
 import PassphraseSetup from '../PassphraseSetup'
 
@@ -146,12 +145,12 @@ export default function VotingPanel({
 
             // Verify approve/reject vote
             if (userVote.typevote === 'Voting_opened') {
-                const verified = await verifyApproveRejectVote(userVote.votevalue, passphrase)
+                const verified = await verifyApproveRejectVote(passphrase, userId, articleId, userVote.votevalue)
                 setVerifiedUserVote(verified)
             }
             // Verify duration vote
             else if (userVote.typevote === 'Debate_Duration_voting') {
-                const verified = await verifyDurationVote(userVote.votevalue, passphrase)
+                const verified = await verifyDurationVote(passphrase, userId, articleId, userVote.votevalue)
                 setVerifiedUserVote(verified)
             }
         }
@@ -224,10 +223,10 @@ export default function VotingPanel({
             if (shouldVerify) {
                 // userVote.votevalue is the hash
                 if (type === 'duration' && userVote.typevote === 'Debate_Duration_voting') {
-                    const verified = await verifyDurationVote(userVote.votevalue, passphrase)
+                    const verified = await verifyDurationVote(passphrase, userId, articleId, userVote.votevalue)
                     if (verified) oldVoteValue = verified
                 } else if (type === 'approve_reject' && userVote.typevote === 'Voting_opened') {
-                    const verified = await verifyApproveRejectVote(userVote.votevalue, passphrase)
+                    const verified = await verifyApproveRejectVote(passphrase, userId, articleId, userVote.votevalue)
                     if (verified) oldVoteValue = verified
                 }
 
