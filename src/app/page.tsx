@@ -171,7 +171,7 @@ export default async function Home() {
         {user && userActivity && (
           <div className="space-y-6 pt-8 border-t border-slate-200 dark:border-slate-800">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">Your Activity</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ActivityPanel
                 title="Last votes"
                 items={userActivity.lastVotes}
@@ -184,16 +184,17 @@ export default async function Home() {
                 type="article"
                 userId={user.id}
               />
-              <ActivityPanel
-                title="Last comments"
-                items={userActivity.lastComments}
-                type="comment"
-                userId={user.id}
-              />
+              <div className="md:col-span-2">
+                <ActivityPanel
+                  title="Last comments"
+                  items={userActivity.lastComments}
+                  type="comment"
+                  userId={user.id}
+                />
+              </div>
             </div>
           </div>
         )}
-
       </div>
     </main>
   )
