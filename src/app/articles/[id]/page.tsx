@@ -30,6 +30,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
     // Fetch debate space
     const debateSpace = await getDebateSpace(article.id)
 
+    // Check if user has profile
+    let hasProfile = false
+    if (user) {
+        const { data: profile } = await supabase
+            .from('users')
+            .select('id')
+            .eq('id', user.id)
+            .maybeSingle()
+        hasProfile = !!profile
+    }
+
     // Prepare data for voting panel
     const durationResults = article.debate_duration_voting_opened_result
     const votingResults = article.voting_opened_result
@@ -62,22 +73,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
                         />
 
                         {/* Voting Panel - Mobile Only (appears after article content) */}
-                        <div className="lg:hidden">
-                            <VotingPanel
-                                articleId={article.id}
-                                status={article.status}
-                                userVote={userVote}
-                                durationResults={durationResults}
-                                votingResults={votingResults}
-                                votedDuration={votedDuration}
-                                statusChangedDate={article.statuschangedate}
-                                firstVoteDate={firstVoteDate}
-                                userId={user?.id}
-                                userEmail={user?.email}
-                            />
-                        </div>
+                        {hasProfile && (
+                            <div className="lg:hidden">
+                                <VotingPanel
+                                    articleId={article.id}
+                                    status={article.status}
+                                    userVote={userVote}
+                                    durationResults={durationResults}
+                                    votingResults={votingResults}
+                                    votedDuration={votedDuration}
+                                    statusChangedDate={article.statuschangedate}
+                                    firstVoteDate={firstVoteDate}
+                                    userId={user?.id}
+                                    userEmail={user?.email}
+                                />
+                            </div>
+                        )}
 
-                        {debateSpace && (
+                        {debateSpace && hasProfile && (
                             <DebateSection
                                 debatespaceId={debateSpace.id}
                                 userId={user?.id}
@@ -86,22 +99,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
                     </div>
 
                     {/* Sidebar Column - Desktop/Tablet Only */}
-                    <div className="hidden lg:block lg:col-span-1">
-                        <div className="sticky top-8">
-                            <VotingPanel
-                                articleId={article.id}
-                                status={article.status}
-                                userVote={userVote}
-                                durationResults={durationResults}
-                                votingResults={votingResults}
-                                votedDuration={votedDuration}
-                                statusChangedDate={article.statuschangedate}
-                                firstVoteDate={firstVoteDate}
-                                userId={user?.id}
-                                userEmail={user?.email}
-                            />
+                    {hasProfile && (
+                        <div className="hidden lg:block lg:col-span-1">
+                            <div className="sticky top-8">
+                                <VotingPanel
+                                    articleId={article.id}
+                                    status={article.status}
+                                    userVote={userVote}
+                                    durationResults={durationResults}
+                                    votingResults={votingResults}
+                                    votedDuration={votedDuration}
+                                    statusChangedDate={article.statuschangedate}
+                                    firstVoteDate={firstVoteDate}
+                                    userId={user?.id}
+                                    userEmail={user?.email}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

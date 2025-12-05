@@ -70,12 +70,16 @@ export default function AuthForm() {
         setError(null)
         setMessage(null)
 
-        // Create auth account first
-        const { data, error } = await supabase.auth.signUp({
+        // Create auth account with user metadata (names stored temporarily)
+        const { error } = await supabase.auth.signUp({
             email,
             password,
             options: {
                 emailRedirectTo: `${location.origin}/auth/callback`,
+                data: {
+                    firstname: firstname,
+                    lastname: lastname
+                }
             },
         })
 
@@ -85,16 +89,14 @@ export default function AuthForm() {
             return
         }
 
-        if (data.user) {
-            // Generate pseudo
-            const pseudo = generatePseudoClient()
-            setGeneratedPseudo(pseudo)
-            setPendingUserId(data.user.id)
-
-            // Show passphrase setup modal
-            setShowPassphraseSetup(true)
-            setLoading(false)
-        }
+        // Success - user needs to confirm email
+        setMessage('Account created! Please check your email to confirm your account.')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+        setFirstname('')
+        setLastname('')
+        setLoading(false)
     }
 
     const handlePassphraseComplete = async (passphrase: string) => {
@@ -107,27 +109,27 @@ export default function AuthForm() {
             const encryptedFirstname = await encryptText(firstname, passphrase)
             const encryptedLastname = await encryptText(lastname, passphrase)
 
-            // Check pseudo uniqueness and create user profile
-            const { error: profileError } = await supabase
-                .from('users')
-                .insert({
-                    id: pendingUserId,
-                    pseudo: generatedPseudo,
-                    encrypted_firstname: encryptedFirstname,
-                    encrypted_lastname: encryptedLastname,
-                    creationdate: new Date().toISOString()
-                })
+            // Import server action dynamically
+            const { createUserProfile } = await import('@/lib/user-actions')
 
-            if (profileError) {
+            // Create user profile via server action
+            const result = await createUserProfile(
+                pendingUserId,
+                generatedPseudo,
+                encryptedFirstname,
+                encryptedLastname
+            )
+
+            if (!result.success) {
                 // If pseudo is not unique, regenerate and try again
-                if (profileError.code === '23505') { // Unique violation
+                if (result.error?.includes('Pseudo')) {
                     const newPseudo = generatePseudoClient()
                     setGeneratedPseudo(newPseudo)
                     setError('Pseudo was not unique, please try again with the new one')
                     setLoading(false)
                     return
                 }
-                setError(profileError.message)
+                setError(result.error || 'Failed to create profile')
                 setLoading(false)
                 return
             }

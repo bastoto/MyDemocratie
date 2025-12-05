@@ -10,5 +10,16 @@ export default async function CreateArticlePage() {
         redirect('/login')
     }
 
+    // Check if user has profile
+    const { data: profile } = await supabase
+        .from('users')
+        .select('id')
+        .eq('id', user.id)
+        .maybeSingle()
+
+    if (!profile) {
+        redirect('/') // Redirect to home where ProfileSetupModal will appear
+    }
+
     return <CreateArticleForm />
 }

@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server'
 import { StatCard } from '@/components/StatCard'
 import UrgentVotingSection from '@/components/UrgentVotingSection'
 import ActivityPanel from '@/components/ActivityPanel'
+import ProfileSetupChecker from '@/components/ProfileSetupChecker'
 import { getArticleStats, getUserActivity } from '@/lib/dashboard-data'
 import { getUrgentVotingArticles } from '@/lib/article-actions'
 import Link from 'next/link'
@@ -14,12 +15,33 @@ export default async function Home() {
   const urgentArticles = await getUrgentVotingArticles()
 
   let userActivity = null
+  let hasProfile = false
+
   if (user) {
     userActivity = await getUserActivity(user.id)
+
+    // Check if user has a profile in the users table
+    const { data: profile } = await supabase
+      .from('users')
+      .select('id')
+      .eq('id', user.id)
+      .maybeSingle()
+
+    hasProfile = !!profile
   }
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      {/* Profile Setup Modal for new users */}
+      {user && (
+        <ProfileSetupChecker
+          userId={user.id}
+          userEmail={user.email || ''}
+          userMetadata={user.user_metadata}
+          hasProfile={hasProfile}
+        />
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
         {/* Urgent Voting Section */}
@@ -36,7 +58,7 @@ export default async function Home() {
                 Participate in the democratic process. Review articles, debate proposals, and cast your vote to shape the future of our constitution.
               </p>
             </div>
-            {user && (
+            {user && hasProfile && (
               <Link
                 href="/articles/create"
                 className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors shadow-sm hover:shadow-md flex items-center gap-2"
