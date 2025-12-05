@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { getStoredPassphrase, verifyApproveRejectVote, verifyDurationVote } from '@/lib/vote-encryption'
 
 interface ActivityPanelProps {
@@ -124,10 +125,26 @@ export default function ActivityPanel({ title, items, type, userId }: ActivityPa
                         {items.map((item: any) => (
                             <li key={item.id} className="text-sm text-slate-600 dark:text-slate-400 border-b border-slate-100 dark:border-slate-800 pb-2 last:border-0">
                                 {type === 'article' && (
-                                    <span>Created <strong>{item.title}</strong> ({item.status})</span>
+                                    <span>
+                                        Created{' '}
+                                        <Link href={`/articles/${item.id}`} className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                                            {item.title}
+                                        </Link>
+                                        {' '}({item.status})
+                                    </span>
                                 )}
                                 {type === 'comment' && (
-                                    <span>Commented on <strong>{item.topics?.title}</strong>: "{item.content.substring(0, 50)}..."</span>
+                                    <span className="flex flex-col gap-1">
+                                        <span>
+                                            Commented on topic{' '}
+                                            <Link href={`/articles/${item.topics?.article_id}#topic-${item.topics?.id}`} className="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                                                {item.topics?.title || 'Unknown'}
+                                            </Link>
+                                        </span>
+                                        <span className="text-xs text-slate-500 dark:text-slate-400">
+                                            {formatVoteDate(item.creationdate)}
+                                        </span>
+                                    </span>
                                 )}
                             </li>
                         ))}
